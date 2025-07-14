@@ -1,0 +1,30 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::table('bookreview', function (Blueprint $table) {
+            $table->foreignId('emotioncategory_id')
+                  ->constrained('emotioncategory', 'emotioncategory_id')
+                  ->onDelete('cascade');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::table('bookreview', function (Blueprint $table) {
+            //
+        });
+    }
+};
