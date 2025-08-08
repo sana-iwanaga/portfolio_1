@@ -27,6 +27,9 @@
                     <x-nav-link :href="route('Top_page')" :active="request()->routeIs('Top_page')">
                         {{ __('Top_page') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('books.show', ['isbn' => 'example-isbn'])" :active="request()->routeIs('books.show')">
+                        {{ __('Books Show') }}
+                    </x-nav-link>
                 </div>
             </div>
 

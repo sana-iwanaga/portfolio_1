@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\NdlBookController;
 use App\Http\Controllers\RakutenBookController;
+use App\Http\Controllers\BookController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,7 +24,10 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 
 })->middleware(['auth', 'verified'])->name('dashboard');
-
+// web.php
+Route::get('/books/{isbn}', [BookController::class, 'show'])->name('books.show');
+Route::get('/reviews/create/{isbn}', [PostController::class, 'create'])->name('reviews.create');
+Route::post('/reviews', [PostController::class, 'store'])->name('reviews.store');
 
 Route::get('/Review_Posts', [PostController::class, 'Review_Posts'])->name('Review_Posts');
 Route::get('/top-page', [PostController::class, 'Top_page'])->name('Top_page');
