@@ -11,6 +11,22 @@
             {{-- 検索フォーム --}}
             <form method="GET" action="{{ route('Books_research') }}" class="mb-6">
                 <div class="flex items-center space-x-4">
+                    <div>
+        <label>タイトル</label>
+        <input type="text" name="title" value="{{ old('title', $title ?? '') }}">
+    </div>
+    <div>
+        <label>著者名</label>
+        <input type="text" name="author" value="{{ old('author', $author ?? '') }}">
+    </div>
+    <div>
+        <label>出版社名</label>
+        <input type="text" name="publisherName" value="{{ old('publisherName', $publisherName ?? '') }}">
+    </div>
+    <div>
+        <label>ISBN</label>
+        <input type="text" name="isbn" value="{{ old('isbn', $isbn ?? '') }}">
+    </div>
                     <input
                         type="text"
                         name="q"
