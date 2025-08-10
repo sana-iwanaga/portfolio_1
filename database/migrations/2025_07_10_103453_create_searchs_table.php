@@ -13,11 +13,10 @@ return new class extends Migration
     {
         Schema::create('searchs', function (Blueprint $table) {
             $table->id('search_id');
-            $table->string('book_title',50);
-            $table->string('book_author',50);
-            $table->string('book_isbn',20);
-            $table->string('book_publisher',50);
-            $table->date('book_published_date');
+            $table->string('title',50);
+            $table->string('author',50);
+            $table->string('isbn',20);
+            $table->string('publisherName',50);
             $table->timestamps();
         });
     }

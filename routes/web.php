@@ -19,7 +19,7 @@ use App\Http\Controllers\HomeController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/Books_research', [RakutenBookController::class, 'search'])->name('Books_research');
+Route::get('/research', [RakutenBookController::class, 'search'])->name('research');
 // Route::get('/books/quicksearch', [NdlBookController::class, 'quickSearch'])->name('books.quicksearch');
 // Route::get('/books/ndl', [NdlBookController::class, 'search'])->name('books.ndl.search');
 Route::get('/', [BookreviewController::class, 'index'])->name('index')->middleware('auth');
@@ -28,11 +28,11 @@ Route::get('/dashboard', function () {
 
 })->middleware(['auth', 'verified'])->name('dashboard');
 // web.php
-Route::get('/books/{isbn}', [BookController::class, 'book'])->name('books.show');
+Route::get('/books/{isbn}', [BookController::class, 'book'])->name('books.book');
 Route::get('/reviews/create/{isbn}', [BookreviewController::class, 'create'])->name('reviews.create');
-Route::post('/reviews', [BookreviewController::class, 'store'])->name('reviews.store');
+Route::post('/Bookreview', [BookreviewController::class, 'store'])->name('reviews.store');
 
-Route::get('/Review_Posts', [BookreviewController::class, 'Review_Posts'])->name('Review_Posts');
+Route::get('/Bookreview', [BookreviewController::class, 'Bookreview'])->name('Bookreview');
 Route::get('/Home', [HomeController::class, 'Home'])->name('Home');
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

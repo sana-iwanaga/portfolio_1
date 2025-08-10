@@ -7,7 +7,21 @@
 
     <div class="py-12 px-6" x-data="bookSearch()">
         <h1 class="text-2xl font-bold mb-4">Booklog - レビュー投稿</h1>
+    
+        <div class="max-w-3xl mx-auto p-4">
+    <h2 class="text-2xl font-bold mb-4">レビューを書く本</h2>
 
+    <div class="flex items-center mb-6">
+        @if($book && $book->mediumImageUrl)
+            <img src="{{ $book->mediumImageUrl }}" alt="{{ $book->title }}" class="w-24 h-auto mr-4 rounded border" />
+        @endif
+
+        <div>
+            <h3 class="text-xl font-semibold">{{ $book->title ?? '本の情報がありません' }}</h3>
+            <p class="text-gray-600">著者: {{ $book->author ?? '不明' }}</p>
+            <p class="text-gray-600">ISBN: {{ $isbn }}</p>
+        </div>
+    </div>
         <!-- 書籍検索
         <div class="mb-6">
             <label class="block text-sm font-semibold mb-1">書籍検索</label>
@@ -43,28 +57,30 @@
                     </template>
                 </ul>
             </template>
-        </div> --> --> -->
+        </div> -->
 
         <!-- 投稿フォーム -->
-        <form action="/posts" method="POST" class="space-y-6">
+        <form action="{{ route('reviews.store') }}" method="POST" class="space-y-6">
             @csrf
 
-            <div>
+            <input type="hidden" name="bookreview[isbn]" value="{{ $isbn }}">
+
+            <!-- <div>
                 <label for="book" class="block text-sm font-medium text-gray-700">本</label>
                 <input
                     type="text"
-                    name="post[book]"
+                    name="bookreview[book]"
                     id="book"
                     x-model="selected.title"
                     class="mt-1 block w-full border border-gray-300 rounded-md p-2"
                     required
                 >
-            </div>
+            </div> -->
 
             <div>
                 <label for="emotion_category" class="block text-sm font-medium text-gray-700">感情カテゴリ</label>
                 <select
-                    name="post[emotion_category]"
+                    name="bookreview[emotion_category]"
                     id="emotion_category"
                     class="mt-1 block w-full border border-gray-300 rounded-md p-2"
                 >
@@ -79,8 +95,8 @@
             <div>
                 <label for="title" class="block text-sm font-medium text-gray-700">タイトル</label>
                 <input
-                    type="text"
-                    name="post[title]"
+                    type="string"
+                    name="bookreview[title]"
                     id="title"
                     placeholder="タイトル"
                     class="mt-1 block w-full border border-gray-300 rounded-md p-2"
@@ -91,7 +107,7 @@
             <div>
                 <label for="body" class="block text-sm font-medium text-gray-700">本文</label>
                 <textarea
-                    name="post[body]"
+                    name="bookreview[body]"
                     id="body"
                     placeholder="本文を入力してください。"
                     class="mt-1 block w-full border border-gray-300 rounded-md p-2"
@@ -104,7 +120,7 @@
                 <input
                     type="submit"
                     value="保存"
-                    class="bg-blue-600 text-black px-4 py-2 rounded hover:bg-blue-700 cursor-pointer"
+                    class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 cursor-pointer"
                 >
             </div>
         </form>

@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('books', function (Blueprint $table) {
             $table->id('book_id');
-            $table->string('book_title');
-            $table->string('book_author');
-            $table->string('book_isbn')->unique();
-            $table->string('book_publisher');
-            $table->date('book_published_date');
-            $table->text('book_description');
-            $table->string('book_genre');
+            $table->string('title');
+            $table->string('author');
+            $table->string('isbn')->unique();
+            $table->string('publisherName');
+            $table->string('mediumImageUrl')->nullable(); // 画像URLを保存するカラム
+            $table->string('SalesDate')->nullable(); 
+            $table->timestamps();
         });
     }
 
