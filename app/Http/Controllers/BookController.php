@@ -26,4 +26,4 @@ class BookController extends Controller
         return view('posts.books.book', compact('book'));  // ビューのパスを確認
     }
 }
-        
+    
