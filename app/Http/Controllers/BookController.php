@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use App\Models\Book;
 
 class BookController extends Controller
 {
@@ -11,7 +12,7 @@ class BookController extends Controller
     {
         $response = Http::get('https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404', [
             'applicationId' => env('RAKUTEN_APP_ID', '1023370564471652170'),
-            'isbn' => $isbn,  // isbn -> isbnjan に変更
+            'isbn' => $isbn, 
             'format' => 'json',
         ]);
 
@@ -21,9 +22,20 @@ class BookController extends Controller
             abort(404, '書籍が見つかりません');
         }
 
-        $book = $data['Items'][0]['Item'];
+        $apibook = $data['Items'][0]['Item'];
 
-        return view('posts.books.book', compact('book'));  // ビューのパスを確認
+        $book = Book::updateOrCreate(
+            ['isbn' => $apibook['isbn']],
+            [
+                'title' => $apibook['title'],
+                'author' => $apibook['author'],
+                'publisherName' => $apibook['publisherName'],
+                'mediumImageUrl' => $apibook['mediumImageUrl'] ?? null,
+                'SalesDate' => $apibook['salesDate'] ?? null,
+            ]
+        );
+
+        return view('posts.books.book', compact('apibook', 'book'));  // ビューのパスを確認
     }
 }
     

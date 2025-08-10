@@ -9,7 +9,7 @@
         <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
 
             {{-- 検索フォーム --}}
-            <form method="GET" action="{{ route('Books_research') }}" class="mb-6 space-y-4">
+            <form method="GET" action="{{ route('research') }}" class="mb-6 space-y-4">
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700">タイトル</label>
@@ -57,7 +57,7 @@
                         @php $item = $book['Item']; @endphp
                         <div class="p-4 border rounded shadow-sm hover:shadow-md transition">
                             <h3 class="font-bold text-lg mb-2">
-                                <a href="{{ route('books.show', ['isbn' => $item['isbn']]) }}"
+                                <a href="{{ route('books.book', ['isbn' => $item['isbn']]) }}"
                                    class="text-indigo-600 hover:underline">
                                     {{ $item['title'] }}
                                 </a>

@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use Illuminate\Http\Request;
-use App\Models\Bookreview;  // Postモデルを使う
+use App\Models\Bookreview; 
 
 class BookreviewController extends Controller
 {
@@ -18,11 +19,11 @@ class BookreviewController extends Controller
     public function Review_Posts()
     {
         $reviews = Bookreview::all();
-        return view('posts.Review_Posts', compact('reviews'));
+        return view('posts.Bookreview', compact('reviews'));
     }
 
     // トップページ
-    public function Top_page()
+    public function Home()
     {
         $reviews = Bookreview::all();
         return view('posts.Home', compact('reviews'));
@@ -32,31 +33,34 @@ class BookreviewController extends Controller
     public function Books_research()
     {
         $reviews = Bookreview::all();
-        return view('posts.Books_research', compact('reviews'));
+        return view('posts.research', compact('reviews'));
     }
 // レビュー作成ページ
     public function create($isbn)
     {
-        return view('posts.Review_Posts', compact('isbn'));
+        $book = Book::where('isbn', $isbn)->first();
+        return view('posts.Bookreview', compact('book', 'isbn'));
     }
+    
 
     // レビュー保存
     public function store(Request $request)
     {
         $request->validate([
-            'post.book' => 'required|string|max:255',
-            'post.title' => 'required|string|max:255',
-            'post.emotion_category' => 'required|string',
-            'post.body' => 'required|string',
+            'bookreview.isbn' => 'required|string',
+            'bookreview.title' => 'required|string|max:255',
+            'bookreview.emotion_category' => 'required|string|in:happy,sad,angry,laugh,honwaka',
+            'bookreview.body' => 'required|string',
         ]);
 
         Bookreview::create([
-            'book' => $request->input('post.book'),
-            'title' => $request->input('post.title'),
-            'emotion_category' => $request->input('post.emotion_category'),
-            'body' => $request->input('post.body'),
+            'isbn' => $request->input('bookreview.isbn'),
+            'title' => $request->input('bookreview.title'),
+            'emotion_category' => $request->input('bookreview.emotion_category'),
+            'body' => $request->input('bookreview.body'),
+            'user_id' => $request->user()->id,
         ]);
 
-        return redirect()->route('Review_Posts')->with('status', 'Review created successfully!');
+        return redirect()->route('Bookreview')->with('status', 'レビューが保存されました');
     }
 };

@@ -8,11 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Search extends Model
 {
     protected $fillable = [
-        'book_title',
-        'book_author',
-        'book_isbn',
-        'book_publisher',
-        'book_published_date',
+        'title',
+        'author',
+        'isbn',
+        'publisherName',
     ];
     use HasFactory;
 }

@@ -15,10 +15,15 @@ return new class extends Migration
             $table->id('bookreview_id');
             // $table->text('review_title');
             // $table->text('review');
-            $table->text('book');
-            $table->text('title');
-            $table->text('emotion_category');
+            $table->string('isbn');
+            $table->string('title');
+            $table->string('emotion_category');
             $table->text('body');
+            $table->unsignedBigInteger('user_id'); // ユーザーIDを追加
+            $table->foreign('user_id')
+                  ->references('id')
+                  ->on('users')
+                  ->onDelete('cascade');
             $table->timestamps();
         });
     }
