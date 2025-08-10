@@ -40,7 +40,7 @@ class RakutenBookController extends Controller
 
         // 条件が1つもない場合
         if (count($queryParams) === 3) {
-            return view('posts.Books_research', [
+            return view('posts.research', [
                 'books' => [],
                 'error' => '検索条件を1つ以上入力してください',
             ]);
@@ -51,7 +51,7 @@ class RakutenBookController extends Controller
             $response = Http::get($url, $queryParams);
 
             if ($response->failed()) {
-                return view('posts.Books_research', [
+                return view('posts.research', [
                     'books' => [],
                     'error' => 'APIの取得に失敗しました',
                 ]);
@@ -60,7 +60,7 @@ class RakutenBookController extends Controller
             $data = $response->json();
             Log::info('Rakuten API response:', $data);
 
-            return view('posts.Books_research', [
+            return view('posts.research', [
                 'books' => $data['Items'] ?? [],
                 'title' => $title,
                 'author' => $author,
@@ -71,7 +71,7 @@ class RakutenBookController extends Controller
 
         } catch (\Exception $e) {
             Log::error('Rakuten API error: ' . $e->getMessage());
-            return view('posts.Books_research', [
+            return view('posts.research', [
                 'books' => [],
                 'error' => '検索中にエラーが発生しました。',
             ]);

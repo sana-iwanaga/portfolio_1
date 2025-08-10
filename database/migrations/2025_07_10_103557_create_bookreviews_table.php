@@ -11,8 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('booklog', function (Blueprint $table) {
-            $table->id('booklog_id');
+        Schema::create('bookreviews', function (Blueprint $table) {
+            $table->id('bookreview_id');
+            // $table->text('review_title');
+            // $table->text('review');
+            $table->text('book');
+            $table->text('title');
+            $table->text('emotion_category');
+            $table->text('body');
             $table->timestamps();
         });
     }
@@ -22,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('booklog');
+        Schema::dropIfExists('bookreviews');
     }
 };

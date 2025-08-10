@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('bookreview', function (Blueprint $table) {
-            $table->foreignId('emotioncategory_id')
-                  ->constrained('emotioncategory', 'emotioncategory_id')
+        Schema::table('searchs', function (Blueprint $table) {
+            $table->foreignId('book_id')
+                  ->constrained('books', 'book_id')
                   ->onDelete('cascade');
         });
     }
@@ -23,7 +23,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('bookreview', function (Blueprint $table) {
+        Schema::table('searchs', function (Blueprint $table) {
             //
         });
     }

@@ -24,8 +24,8 @@
                     <x-nav-link :href="route('Review_Posts')" :active="request()->routeIs('Review_Posts')">
                         {{ __('Review_Posts') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('Top_page')" :active="request()->routeIs('Top_page')">
-                        {{ __('Top_page') }}
+                    <x-nav-link :href="route('Home')" :active="request()->routeIs('Home')">
+                        {{ __('Home') }}
                     </x-nav-link>
                     <x-nav-link :href="route('books.show', ['isbn' => 'example-isbn'])" :active="request()->routeIs('books.show')">
                         {{ __('Books Show') }}

@@ -8,7 +8,7 @@
     <div class="py-12 px-6" x-data="bookSearch()">
         <h1 class="text-2xl font-bold mb-4">Booklog - レビュー投稿</h1>
 
-        <!-- 書籍検索 -->
+        <!-- 書籍検索
         <div class="mb-6">
             <label class="block text-sm font-semibold mb-1">書籍検索</label>
             <div class="flex gap-2">
@@ -20,7 +20,7 @@
                     @keyup.enter="searchBooks"
                 >
                 <!-- ↑ Enterキーでも検索できる -->
-                <button
+                <!-- <button
                     type="button"
                     @click="searchBooks"
                     class="bg-blue-600 text-white px-3 py-2 rounded"
@@ -28,7 +28,7 @@
             </div>
 
             <!-- 検索結果 -->
-            <template x-if="results.length > 0">
+            <!-- <template x-if="results.length > 0">
                 <ul class="mt-3 space-y-2">
                     <template x-for="book in results" :key="book.title">
                         <li class="border p-2 rounded hover:bg-gray-100">
@@ -43,7 +43,7 @@
                     </template>
                 </ul>
             </template>
-        </div>
+        </div> --> --> -->
 
         <!-- 投稿フォーム -->
         <form action="/posts" method="POST" class="space-y-6">
@@ -114,7 +114,7 @@
         </div>
     </div>
 
-    <!-- Alpine.js の検索スクリプト -->
+    <!-- Alpine.js の検索スクリプト
     <script>
         function bookSearch() {
             return {
@@ -148,4 +148,4 @@
             }
         }
     </script>
-</x-app-layout>
+</x-app-layout> -->
