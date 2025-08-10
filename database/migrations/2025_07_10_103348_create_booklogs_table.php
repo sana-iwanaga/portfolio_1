@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('search', function (Blueprint $table) {
-            $table->foreignId('user_id')
-                  ->constrained('user', 'user_id')
-                  ->onDelete('cascade');
+        Schema::create('booklogs', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
         });
     }
 
@@ -23,8 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('search', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('booklogs');
     }
 };
