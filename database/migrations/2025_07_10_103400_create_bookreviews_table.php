@@ -17,7 +17,9 @@ return new class extends Migration
             // $table->text('review');
             $table->string('isbn');
             $table->string('title');
-            $table->string('emotion_category');
+            $table->foreignId('emotioncategory_id')
+                  ->constrained('emotioncategories', 'emotioncategory_id')
+                  ->onDelete('cascade');
             $table->text('body');
             $table->unsignedBigInteger('user_id'); // ユーザーIDを追加
             $table->foreign('user_id')

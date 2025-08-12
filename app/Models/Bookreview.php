@@ -7,9 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Bookreview extends Model
 {
+    protected $primaryKey = 'emotioncategory_id';
     protected $fillable = [
         'isbn', // Added to match the migration
-        'emotion_category',
+        'emotioncategory_id',
         'title',
         'body',
         'user_id', // Assuming user_id is used to track the user who created the review
@@ -24,5 +25,10 @@ class Bookreview extends Model
     public function getPaginateByLimit(int $limit_count = 5)
     {
         return $this::with('user')->orderBy('updated_at', 'DESC')->paginate($limit_count);
+    }
+
+    public function emotionCategory()
+    {
+        return $this->belongsTo(EmotionCategory::class, 'emotioncategory_id');
     }
 }

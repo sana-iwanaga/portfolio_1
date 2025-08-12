@@ -30,9 +30,9 @@ Route::get('/dashboard', function () {
 // web.php
 Route::get('/books/{isbn}', [BookController::class, 'book'])->name('books.book');
 Route::get('/reviews/create/{isbn}', [BookreviewController::class, 'create'])->name('reviews.create');
+Route::get('/Bookreview', [BookreviewController::class, 'index'])->name('reviews.index');
 Route::post('/Bookreview', [BookreviewController::class, 'store'])->name('reviews.store');
 
-Route::get('/Bookreview', [BookreviewController::class, 'Bookreview'])->name('Bookreview');
 Route::get('/Home', [HomeController::class, 'Home'])->name('Home');
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
