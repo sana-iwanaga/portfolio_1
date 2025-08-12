@@ -78,17 +78,16 @@
             </div> -->
 
             <div>
-                <label for="emotion_category" class="block text-sm font-medium text-gray-700">感情カテゴリ</label>
+                <label for="emotioncategory_id" class="block text-sm font-medium text-gray-700">感情カテゴリ</label>
                 <select
-                    name="bookreview[emotion_category]"
-                    id="emotion_category"
+                    name="bookreview[emotioncategory_id]"
+                    id="emotioncategory_id"
                     class="mt-1 block w-full border border-gray-300 rounded-md p-2"
                 >
-                    <option value="happy">嬉しい</option>
-                    <option value="sad">悲しい</option>
-                    <option value="angry">怒り</option>
-                    <option value="laugh">笑える</option>
-                    <option value="honwaka">ほんわか</option>
+                    <option value="">選択してください</option>
+                    @foreach($emotionCategories as $category)
+                        <option value="{{ $category->emotioncategory_id }}">{{ $category->emotioncategory_name }}</option>
+                    @endforeach
                 </select>
             </div>
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use Illuminate\Http\Request;
 use App\Models\Bookreview; 
+use App\Models\EmotionCategory;
 
 class BookreviewController extends Controller
 {
@@ -39,9 +40,11 @@ class BookreviewController extends Controller
     public function create($isbn)
     {
         $book = Book::where('isbn', $isbn)->first();
-        return view('posts.Bookreview', compact('book', 'isbn'));
+        $emotionCategories = EmotionCategory::all();
+        return view('posts.Bookreview', compact('book', 'isbn', 'emotionCategories'));
+
     }
-    
+
 
     // レビュー保存
     public function store(Request $request)
@@ -49,18 +52,19 @@ class BookreviewController extends Controller
         $request->validate([
             'bookreview.isbn' => 'required|string',
             'bookreview.title' => 'required|string|max:255',
-            'bookreview.emotion_category' => 'required|string|in:happy,sad,angry,laugh,honwaka',
+            'bookreview.emotioncategory_id' => 'required|exists:emotioncategories,emotioncategory_id',
             'bookreview.body' => 'required|string',
         ]);
 
         Bookreview::create([
             'isbn' => $request->input('bookreview.isbn'),
             'title' => $request->input('bookreview.title'),
-            'emotion_category' => $request->input('bookreview.emotion_category'),
+            'emotioncategory_id' => $request->input('bookreview.emotioncategory_id'),
             'body' => $request->input('bookreview.body'),
             'user_id' => $request->user()->id,
         ]);
 
-        return redirect()->route('Bookreview')->with('status', 'レビューが保存されました');
+        return redirect()->route('reviews.index')->with('status', 'レビューが保存されました');
     }
+
 };
