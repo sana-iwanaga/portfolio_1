@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use App\Models\Book;
+use App\Models\Bookreview;
 
 class BookController extends Controller
 {
@@ -35,7 +36,11 @@ class BookController extends Controller
             ]
         );
 
-        return view('posts.books.book', compact('apibook', 'book'));  // ビューのパスを確認
+        $reviews = Bookreview::with(['user', 'emotioncategory'])
+                     ->where('isbn', $apibook['isbn'])
+                     ->get();
+
+        return view('posts.books.book', compact('apibook', 'book', 'reviews'));  // ビューのパスを確認
     }
 }
     

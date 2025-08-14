@@ -31,7 +31,37 @@
     </a>
 </div>
 
+<div class="mt-4">
+    <form action="{{ route('booklogs.store') }}" method="POST">
+        @csrf
+        <input type="hidden" name="isbn" value="{{ $apibook['isbn'] ?? '' }}">
+        <input type="hidden" name="title" value="{{ $apibook['title'] ?? '' }}">
 
+        <label for="status" class="block mb-1 font-medium">ステータスを選択：</label>
+        <select name="status" id="status" class="border rounded px-2 py-1 mb-2">
+            <option value="unread">未読</option>
+            <option value="reading">読書中</option>
+            <option value="read">読了</option>
+        </select>
 
+        <button type="submit"
+                class="inline-block px-4 py-2 bg-green-600 text-white rounded hover:bg-green-500">
+            読書ログに追加
+        </button>
+    </form>
+</div>
+
+       {{-- レビュー一覧 --}}
+        <div class="bg-white shadow rounded p-6">
+            <h3 class="text-lg font-bold mb-4">レビュー一覧</h3>
+            @forelse($reviews as $review)
+                <div class="border-b border-gray-200 py-2">
+                    <p><strong>{{ $review->user->name ?? '名無し' }}</strong> - 感情: {{ $review->emotionCategory->emotioncategory_name ?? '不明' }}</p>
+                    <p>{{ $review->body }}</p>
+                </div>
+            @empty
+                <p>まだレビューはありません。</p>
+            @endforelse
+        </div>
     </div>
 </x-app-layout>
