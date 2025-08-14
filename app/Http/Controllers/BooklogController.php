@@ -8,25 +8,31 @@ use App\Models\Booklog;
 
 class BooklogController extends Controller
 {
-    public function index()
-    {
-        // ログインユーザーの全読書ログ
-        $booklogs = Booklog::where('user_id', Auth::id())->get();
+    public function booklogsall()
+{
+    // ログインユーザーの全読書ログ
+    $allbooklogs = Booklog::where('user_id', Auth::id())->get();
 
-        // 最新3件
-        $latestBooklogs = Booklog::where('user_id', Auth::id())
-                                  ->orderBy('created_at', 'desc')
-                                  ->take(3)
-                                  ->get();
 
-        // ステータスごとの件数
-        $statusCounts = Booklog::where('user_id', Auth::id())
-                               ->selectRaw('status, count(*) as count')
-                               ->groupBy('status')
-                               ->pluck('count','status');
+    // 最新3件
+    $latestBooklogs = Booklog::where('user_id', Auth::id())
+                              ->orderBy('created_at', 'desc')
+                              ->take(3)
+                              ->get();
 
-        return view('posts.home', compact('booklogs', 'latestBooklogs', 'statusCounts'));
-    }
+    // ステータスごとの件数
+    $statusCounts = Booklog::where('user_id', Auth::id())
+                           ->selectRaw('status, count(*) as count')
+                           ->groupBy('status')
+                           ->pluck('count','status');
+
+    return view('posts.booklog', compact(
+        'allbooklogs',
+        'latestBooklogs',
+        'statusCounts'
+    ));
+}
+
 
     public function store(Request $request)
     {

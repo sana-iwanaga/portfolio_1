@@ -18,7 +18,7 @@
         <div class="bg-white shadow rounded p-6">
             <h3 class="text-lg font-bold mb-2">読書ログ一覧</h3>
             <ul>
-                @forelse($allBooklogs as $log)
+                @forelse($allbooklogs as $log)
                     <li class="mb-2">
                         <strong>{{ $log->title }}</strong> - ステータス: {{ $log->status_label }}
                     </li>

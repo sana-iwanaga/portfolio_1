@@ -23,7 +23,7 @@ use App\Http\Controllers\BooklogController;
 Route::get('/research', [RakutenBookController::class, 'search'])->name('research');
 // Route::get('/books/quicksearch', [NdlBookController::class, 'quickSearch'])->name('books.quicksearch');
 // Route::get('/books/ndl', [NdlBookController::class, 'search'])->name('books.ndl.search');
-Route::get('/', [BookreviewController::class, 'index'])->name('index')->middleware('auth');
+Route::get('/', [BooklogController::class, 'booklogsall'])->name('index')->middleware('auth');
 Route::get('/dashboard', function () {
     return view('dashboard');
 
@@ -42,8 +42,8 @@ Route::middleware('auth')->group(function () {
 });
 Route::get('/home', [HomeController::class, 'latestBooklog'])->name('home')->middleware('auth');
 Route::middleware(['auth'])->group(function () {
-   
-    Route::get('/booklogs', [BooklogController::class, 'index'])->name('booklogs.index');
+    Route::get('/booklogs', [BooklogController::class, 'booklogsall'])->name('booklogs.index');
+    Route::get('/allbooklogs', [BooklogController::class, 'booklogsindex'])->name('booklogs.all');
     Route::post('/booklogs', [BooklogController::class, 'store'])->name('booklogs.store');
     Route::patch('/booklogs/{id}/status', [BooklogController::class, 'updateStatus'])->name('booklogs.updateStatus');
     Route::delete('/booklogs/{id}', [BooklogController::class, 'destroy'])->name('booklogs.destroy');
