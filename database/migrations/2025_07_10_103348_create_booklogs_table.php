@@ -13,7 +13,13 @@ return new class extends Migration
     {
         Schema::create('booklogs', function (Blueprint $table) {
             $table->id('booklog_id');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('isbn', 20);
+            $table->string('title');
+            $table->enum('status', ['unread', 'reading', 'read']);
             $table->timestamps();
+            $table->unique(['user_id', 'isbn']); // ユーザーごとにISBNの重複を防ぐ
         });
     }
 

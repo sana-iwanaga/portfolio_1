@@ -8,6 +8,7 @@ use App\Http\Controllers\RakutenBookController;
 use App\Http\Controllers\BookController;
 use App\Models\Bookreview;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\BooklogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,12 +34,19 @@ Route::get('/reviews/create/{isbn}', [BookreviewController::class, 'create'])->n
 Route::get('/Bookreview', [BookreviewController::class, 'index'])->name('reviews.index');
 Route::post('/Bookreview', [BookreviewController::class, 'store'])->name('reviews.store');
 
-Route::get('/Home', [HomeController::class, 'Home'])->name('Home');
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+});
+Route::get('/home', [HomeController::class, 'latestBooklog'])->name('home')->middleware('auth');
+Route::middleware(['auth'])->group(function () {
+   
+    Route::get('/booklogs', [BooklogController::class, 'index'])->name('booklogs.index');
+    Route::post('/booklogs', [BooklogController::class, 'store'])->name('booklogs.store');
+    Route::patch('/booklogs/{id}/status', [BooklogController::class, 'updateStatus'])->name('booklogs.updateStatus');
+    Route::delete('/booklogs/{id}', [BooklogController::class, 'destroy'])->name('booklogs.destroy');
 });
 
 require __DIR__.'/auth.php';

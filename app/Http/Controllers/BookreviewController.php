@@ -64,7 +64,8 @@ class BookreviewController extends Controller
             'user_id' => $request->user()->id,
         ]);
 
-        return redirect()->route('reviews.index')->with('status', 'レビューが保存されました');
+        return redirect()->route('books.book', ['isbn' => $request->input('bookreview.isbn')])
+        ->with('status', 'レビューが保存されました');
     }
 
 };
