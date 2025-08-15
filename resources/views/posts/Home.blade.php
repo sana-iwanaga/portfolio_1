@@ -25,5 +25,20 @@
                 @endforelse
             </ul>
         </div>
+
+        <div class="bg-white shadow rounded p-6">
+            <h3 class="text-lg font-bold mb-2">最近追加したレビュー</h3>
+            <ul>
+                @forelse($latestBookreviews as $log)
+                    <li>
+                        <strong>{{ $log->book_title }}</strong> : {{ $log->title }} - {{ $log->body }}
+                    </li>
+                @empty
+                    <li>まだレビューはありません</li>
+                @endforelse
+            </ul>
+        </div>
+
     </div>
 </x-app-layout>
+
