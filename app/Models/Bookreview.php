@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Bookreview extends Model
 {
-    protected $primaryKey = 'emotioncategory_id';
+    protected $primaryKey = 'bookreview_id';
     protected $fillable = [
+        'book_title', // Changed from 'review_title' to 'book_title' to match the migration
         'isbn', // Added to match the migration
         'emotioncategory_id',
         'title',

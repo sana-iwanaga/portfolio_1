@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('isbn', 20);
             $table->string('title');
             $table->enum('status', ['unread', 'reading', 'read']);
+            $table->text('memo')->nullable();
             $table->timestamps();
             $table->unique(['user_id', 'isbn']); // ユーザーごとにISBNの重複を防ぐ
         });

@@ -40,6 +40,7 @@ class BooklogController extends Controller
             'isbn'   => 'required|string|max:20',
             'title'  => 'required|string|max:255',
             'status' => 'required|in:unread,reading,read',
+            'memo'   => 'nullable|string|max:1000',
         ]);
 
         Booklog::create([
@@ -47,6 +48,7 @@ class BooklogController extends Controller
             'isbn'    => $request->isbn,
             'title'   => $request->title,
             'status'  => $request->status,
+            'memo'    => $request->memo,
         ]);
 
         return redirect()->route('booklogs.index')->with('success', 'Booklog created successfully.');
@@ -66,6 +68,23 @@ class BooklogController extends Controller
         $booklog->save();
 
         return back()->with('success', 'ステータスを更新しました');
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|in:unread,reading,read',
+            'memo'   => 'nullable|string|max:1000',
+        ]);
+
+        $booklog = Booklog::where('user_id', Auth::id())
+                          ->where('booklog_id', $id)
+                          ->firstOrFail();
+        $booklog->status = $request->status;
+        $booklog->memo = $request->memo;
+        $booklog->save();
+
+        return back()->with('success', '読書ログを更新しました');
     }
 
     public function destroy($id)

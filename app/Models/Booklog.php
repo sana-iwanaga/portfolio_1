@@ -13,6 +13,7 @@ class Booklog extends Model
         'isbn',
         'title',
         'status',
+        'memo',
     ];
     use HasFactory;
 

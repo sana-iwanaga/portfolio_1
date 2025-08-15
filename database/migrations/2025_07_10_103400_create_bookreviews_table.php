@@ -16,6 +16,7 @@ return new class extends Migration
             // $table->text('review_title');
             // $table->text('review');
             $table->string('isbn');
+            $table->string('book_title')->nullable();
             $table->string('title');
             $table->foreignId('emotioncategory_id')
                   ->constrained('emotioncategories', 'emotioncategory_id')

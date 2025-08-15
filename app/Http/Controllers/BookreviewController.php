@@ -6,6 +6,7 @@ use App\Models\Book;
 use Illuminate\Http\Request;
 use App\Models\Bookreview; 
 use App\Models\EmotionCategory;
+use Illuminate\Support\Facades\Http;
 
 class BookreviewController extends Controller
 {
@@ -56,16 +57,43 @@ class BookreviewController extends Controller
             'bookreview.body' => 'required|string',
         ]);
 
+        $isbn = $request->input('bookreview.isbn');
+        $book_title = $this->getTitle($isbn);
+
+
         Bookreview::create([
-            'isbn' => $request->input('bookreview.isbn'),
+            'isbn' => $isbn,
+            'book_title' => $book_title,
             'title' => $request->input('bookreview.title'),
             'emotioncategory_id' => $request->input('bookreview.emotioncategory_id'),
             'body' => $request->input('bookreview.body'),
             'user_id' => $request->user()->id,
         ]);
 
-        return redirect()->route('books.book', ['isbn' => $request->input('bookreview.isbn')])
-        ->with('status', 'レビューが保存されました');
+        return redirect()->route('books.book', ['isbn' => $isbn])
+            ->with('status', 'レビューが保存されました');
     }
+
+public function getTitle(string $isbn): string
+{
+    $queryParams = [
+        'applicationId' => env('RAKUTEN_APP_ID'),
+        'isbn' => $isbn,
+        'format' => 'json',
+        'hits' => 1,
+    ];
+
+    $url = 'https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404';
+    $response = Http::get($url, $queryParams);
+
+    if ($response->failed()) {
+        return 'タイトル不明';
+    }
+
+    $data = $response->json();
+    return $data['Items'][0]['Item']['title'] ?? 'タイトル不明';
+}
+
+
 
 };

@@ -33,6 +33,9 @@ Route::get('/books/{isbn}', [BookController::class, 'book'])->name('books.book')
 Route::get('/reviews/create/{isbn}', [BookreviewController::class, 'create'])->name('reviews.create');
 Route::get('/Bookreview', [BookreviewController::class, 'index'])->name('reviews.index');
 Route::post('/Bookreview', [BookreviewController::class, 'store'])->name('reviews.store');
+// routes/api.php
+Route::get('/books/title/{isbn}', [BookreviewController::class, 'getTitle']);
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -46,6 +49,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/allbooklogs', [BooklogController::class, 'booklogsindex'])->name('booklogs.all');
     Route::post('/booklogs', [BooklogController::class, 'store'])->name('booklogs.store');
     Route::patch('/booklogs/{id}/status', [BooklogController::class, 'updateStatus'])->name('booklogs.updateStatus');
+    Route::put('/booklogs/{id}', [BooklogController::class, 'update'])->name('booklogs.update');
     Route::delete('/booklogs/{id}', [BooklogController::class, 'destroy'])->name('booklogs.destroy');
 });
 
