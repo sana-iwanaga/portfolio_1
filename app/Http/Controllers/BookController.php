@@ -40,7 +40,7 @@ class BookController extends Controller
                      ->where('isbn', $apibook['isbn'])
                      ->get();
 
-        return view('posts.books.book', compact('apibook', 'book', 'reviews'));  // ビューのパスを確認
+        return view('posts.books.Book', compact('apibook', 'book', 'reviews'));  // ビューのパスを確認
     }
 }
     
