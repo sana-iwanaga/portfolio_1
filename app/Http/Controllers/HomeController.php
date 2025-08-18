@@ -29,4 +29,4 @@ class HomeController extends Controller
     return view('posts.home', compact('latestBooklogs', 'statusCounts', 'latestBookreviews'));
 }
 
-};
+}
