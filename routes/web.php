@@ -10,6 +10,7 @@ use App\Models\Bookreview;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BooklogController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -53,6 +54,10 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/booklogs/{id}/status', [BooklogController::class, 'updateStatus'])->name('booklogs.updateStatus');
     Route::put('/booklogs/{id}', [BooklogController::class, 'update'])->name('booklogs.update');
     Route::delete('/booklogs/{id}', [BooklogController::class, 'destroy'])->name('booklogs.destroy');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::post('/reviews/{review}/like', [BookreviewController::class, 'like'])->name('reviews.like');
 });
 
 require __DIR__.'/auth.php';

@@ -33,4 +33,9 @@ class Bookreview extends Model
     {
         return $this->belongsTo(EmotionCategory::class, 'emotioncategory_id');
     }
+
+    public function likes() 
+    {
+        return $this->hasMany(ReviewLike::class);
+    }
 }

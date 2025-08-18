@@ -63,7 +63,19 @@
                 @endif
             </p>
             <p>{{ $review->body }}</p>
+            {{-- いいねボタン --}}
+    @auth
+        <form action="{{ route('reviews.like', $review->id) }}" method="POST" class="inline">
+            @csrf
+            <button type="submit" class="text-blue-500 hover:underline">
+                いいね ({{ $review->likes->count() }})
+            </button>
+        </form>
+    @else
+        <span class="text-gray-400">いいね ({{ $review->likes->count() }})</span>
+    @endauth
         </div>
+
     @empty
         <p>まだレビューはありません。</p>
     @endforelse

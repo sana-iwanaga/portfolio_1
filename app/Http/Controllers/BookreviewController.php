@@ -115,6 +115,14 @@ public function getTitle(string $isbn): string
     return $data['Items'][0]['Item']['title'] ?? 'タイトル不明';
 }
 
-
-
+    // 書籍詳細ページ
+    public function like(Bookreview $bookreview)
+    {
+        $user = Auth::user();
+        $review = Bookreview::where('isbn', $bookreview->isbn)->firstOrFail();
+        $review->likes()->firstOrCreate([
+            'user_id' => $user->id,
+        ]);
+        return back();
+    }
 };
