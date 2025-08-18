@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use Illuminate\Http\Request;
 use App\Models\Bookreview; 
-use App\Models\EmotionCategory;
+use App\Models\Emotioncategory;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Auth;
 
@@ -42,7 +42,7 @@ class BookreviewController extends Controller
     public function create($isbn)
     {
         $book = Book::where('isbn', $isbn)->first();
-        $emotionCategories = EmotionCategory::all();
+        $emotionCategories = Emotioncategory::all();
         return view('posts.Bookreview', compact('book', 'isbn', 'emotionCategories'));
 
     }
