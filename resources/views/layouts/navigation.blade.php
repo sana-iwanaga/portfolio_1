@@ -18,9 +18,6 @@
                     <x-nav-link :href="route('research')" :active="request()->routeIs('research')">
                         {{ __('Books_research') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('booklogs.index')" :active="request()->routeIs('booklogs.index')">
-                        {{ __('Booklogs') }}
-                    </x-nav-link>
                 </div>
             </div>
 
