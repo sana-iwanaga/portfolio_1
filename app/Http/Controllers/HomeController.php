@@ -26,7 +26,7 @@ class HomeController extends Controller
                            ->take(3)
                            ->get();
 
-    return view('posts.home', compact('latestBooklogs', 'statusCounts', 'latestBookreviews'));
+    return view('posts.Home', compact('latestBooklogs', 'statusCounts', 'latestBookreviews'));
 }
 
 }
