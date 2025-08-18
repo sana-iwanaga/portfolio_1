@@ -23,7 +23,7 @@ use App\Http\Controllers\BooklogController;
 Route::get('/research', [RakutenBookController::class, 'search'])->name('research');
 // Route::get('/books/quicksearch', [NdlBookController::class, 'quickSearch'])->name('books.quicksearch');
 // Route::get('/books/ndl', [NdlBookController::class, 'search'])->name('books.ndl.search');
-Route::get('/', [BooklogController::class, 'booklogsall'])->name('index')->middleware('auth');
+Route::get('/booklogs', [BooklogController::class, 'booklogsall'])->name('index')->middleware('auth');
 Route::get('/dashboard', function () {
     return view('dashboard');
 
@@ -35,7 +35,9 @@ Route::get('/Bookreview', [BookreviewController::class, 'index'])->name('reviews
 Route::post('/Bookreview', [BookreviewController::class, 'store'])->name('reviews.store');
 // routes/api.php
 Route::get('/books/title/{isbn}', [BookreviewController::class, 'getTitle']);
-
+Route::delete('/bookreviews/{id}', [BookreviewController::class, 'destroy'])->name('reviews.destroy');
+Route::get('/myreviews', [BookreviewController::class, 'myReviews'])
+    ->name('reviews.my');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -43,7 +45,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
 });
-Route::get('/home', [HomeController::class, 'latestBooklog'])->name('home')->middleware('auth');
+Route::get('/', [HomeController::class, 'latestBooklog'])->name('home')->middleware('auth');
 Route::middleware(['auth'])->group(function () {
     Route::get('/booklogs', [BooklogController::class, 'booklogsall'])->name('booklogs.index');
     Route::get('/allbooklogs', [BooklogController::class, 'booklogsindex'])->name('booklogs.all');

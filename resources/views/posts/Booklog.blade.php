@@ -1,12 +1,12 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">ホーム</h2>
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">{{ Auth::user()->name }} さんの読書ログ</h2>
     </x-slot>
 
     <div class="py-8 max-w-4xl mx-auto sm:px-6 lg:px-8">
         {{-- ステータスの概要 --}}
         <div class="bg-white shadow rounded p-6 mb-6">
-            <h3 class="text-lg font-bold mb-2">読書ログの概要</h3>
+            <h3 class="text-lg font-bold mb-2">読書ログ</h3>
             <ul>
                 <li>未読: {{ $statusCounts['unread'] ?? 0 }} 冊</li>
                 <li>読書中: {{ $statusCounts['reading'] ?? 0 }} 冊</li>

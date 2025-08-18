@@ -77,4 +77,5 @@ class RakutenBookController extends Controller
             ]);
         }
     }
+
 }

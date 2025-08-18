@@ -14,6 +14,7 @@ class Bookreview extends Model
         'emotioncategory_id',
         'title',
         'body',
+        'rating', // Added to match the migration
         'user_id', // Assuming user_id is used to track the user who created the review
     ];
     use HasFactory;

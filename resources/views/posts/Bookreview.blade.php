@@ -78,6 +78,19 @@
             </div> -->
 
             <div>
+                <label for="rating" class="block text-sm font-medium text-gray-700">評価</label>
+                <div class="mt-1">
+                    @for($i = 1; $i <= 5; $i++)
+                        <label class="inline-flex items-center space-x-1 cursor-pointer">
+                            <input type="radio" name="bookreview[rating]" value="{{ $i }}" class="hidden peer" required>
+                            <span class="text-gray-400 peer-checked:text-yellow-400 hover:text-yellow-500 text-xl">{{ $i }}★</span>
+                        </label>
+                    @endfor
+                </div>
+            </div>
+
+
+            <div>
                 <label for="emotioncategory_id" class="block text-sm font-medium text-gray-700">感情カテゴリ</label>
                 <select
                     name="bookreview[emotioncategory_id]"

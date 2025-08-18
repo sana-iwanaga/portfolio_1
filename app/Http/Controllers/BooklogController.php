@@ -43,6 +43,14 @@ class BooklogController extends Controller
             'memo'   => 'nullable|string|max:1000',
         ]);
 
+        $exist = Booklog::where('user_id', Auth::id())
+            ->where('isbn', $request->isbn)
+            ->exists();
+
+        if ($exist) {
+            return redirect()->back()->with('error', 'この本のログはすでに登録されています。');
+        }
+
         Booklog::create([
             'user_id' => Auth::id(),
             'isbn'    => $request->isbn,
@@ -51,8 +59,10 @@ class BooklogController extends Controller
             'memo'    => $request->memo,
         ]);
 
+
         return redirect()->route('booklogs.index')->with('success', 'Booklog created successfully.');
     }
+
 
     public function updateStatus(Request $request, $id)
     {
