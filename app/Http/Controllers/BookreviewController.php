@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Bookreview; 
 use App\Models\EmotionCategory;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Auth;
 
 class BookreviewController extends Controller
 {
@@ -66,6 +67,7 @@ class BookreviewController extends Controller
             'book_title' => $book_title,
             'title' => $request->input('bookreview.title'),
             'emotioncategory_id' => $request->input('bookreview.emotioncategory_id'),
+            'rating' => $request->input('bookreview.rating'), // レーティングを追加
             'body' => $request->input('bookreview.body'),
             'user_id' => $request->user()->id,
         ]);
@@ -73,6 +75,25 @@ class BookreviewController extends Controller
         return redirect()->route('books.book', ['isbn' => $isbn])
             ->with('status', 'レビューが保存されました');
     }
+
+public function destroy($id)
+    {
+        $review = Bookreview::where('user_id', Auth::id())->where('bookreview_id', $id)->firstOrFail();
+        $review->delete();
+
+        return redirect()->route('reviews.my')->with('success', 'レビューが削除されました');
+    }
+
+public function myReviews()
+{
+    $reviews = Bookreview::where('user_id', Auth::id())
+                         ->orderBy('created_at', 'desc')
+                         ->get(); // 全件取得
+
+    return view('posts.myreview', compact('reviews'));
+}
+    // 書籍タイトル取得
+
 
 public function getTitle(string $isbn): string
 {

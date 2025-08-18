@@ -17,6 +17,7 @@ return new class extends Migration
             // $table->text('review');
             $table->string('isbn');
             $table->string('book_title')->nullable();
+            $table->tinyInteger('rating')->unsigned()->nullable();
             $table->string('title');
             $table->foreignId('emotioncategory_id')
                   ->constrained('emotioncategories', 'emotioncategory_id')
