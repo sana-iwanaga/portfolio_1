@@ -65,10 +65,10 @@
             <p>{{ $review->body }}</p>
             {{-- いいねボタン --}}
     @auth
-        <form action="{{ route('reviews.like', $review->id) }}" method="POST" class="inline">
+        <form action="{{ route('reviews.like', $review->bookreview_id) }}" method="POST" class="inline">
             @csrf
             <button type="submit" class="text-blue-500 hover:underline">
-                いいね ({{ $bookreview->likes->count() }})
+                いいね ({{ $review->likes->count() }})
             </button>
         </form>
     @else
