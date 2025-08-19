@@ -31,7 +31,7 @@ class Bookreview extends Model
 
     public function emotionCategory()
     {
-        return $this->belongsTo(EmotionCategory::class, 'emotioncategory_id');
+        return $this->belongsTo(Emotioncategory::class, 'emotioncategory_id');
     }
 
     public function likes() 

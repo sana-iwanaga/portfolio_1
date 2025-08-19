@@ -90,7 +90,7 @@ public function myReviews()
                          ->orderBy('created_at', 'desc')
                          ->get(); // 全件取得
 
-    return view('posts.myreview', compact('reviews'));
+    return view('posts.Myreview', compact('reviews'));
 }
     // 書籍タイトル取得
 
