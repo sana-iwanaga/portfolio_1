@@ -94,9 +94,7 @@ public function myReviews()
     return view('posts.Myreview', compact('reviews'));
 }
     // 書籍タイトル取得
-
-
-public function getTitle(string $isbn): string
+    public function getTitle(string $isbn): string
 {
     return Cache::remember("book_title_{$isbn}", now()->addDays(7), function () use ($isbn) {
         $queryParams = [
@@ -105,18 +103,19 @@ public function getTitle(string $isbn): string
             'format' => 'json',
             'hits' => 1,
         ];
+
+        $url = 'https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404';
+        $response = Http::get($url, $queryParams);
+
+        if ($response->failed()) {
+            return 'タイトル不明';
+        }
+
+        $data = $response->json();
+        return $data['Items'][0]['Item']['title'] ?? 'タイトル不明';
     });
-
-    $url = 'https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404';
-    $response = Http::get($url, $queryParams);
-
-    if ($response->failed()) {
-        return 'タイトル不明';
-    }
-
-    $data = $response->json();
-    return $data['Items'][0]['Item']['title'] ?? 'タイトル不明';
 }
+
 
     // 書籍詳細ページ
     public function like(Bookreview $bookreview)
