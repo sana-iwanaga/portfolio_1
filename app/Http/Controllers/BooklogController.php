@@ -26,7 +26,7 @@ class BooklogController extends Controller
                            ->groupBy('status')
                            ->pluck('count','status');
 
-    return view('posts.booklog', compact(
+    return view('posts.Booklog', compact(
         'allbooklogs',
         'latestBooklogs',
         'statusCounts'
