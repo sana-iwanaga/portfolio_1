@@ -8,6 +8,7 @@ use App\Models\Bookreview;
 use App\Models\Emotioncategory;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class BookreviewController extends Controller
 {
@@ -97,12 +98,14 @@ public function myReviews()
 
 public function getTitle(string $isbn): string
 {
-    $queryParams = [
-        'applicationId' => env('RAKUTEN_APP_ID'),
-        'isbn' => $isbn,
-        'format' => 'json',
-        'hits' => 1,
-    ];
+    return Cache::remember("book_title_{$isbn}", now()->addDays(7), function () use ($isbn) {
+        $queryParams = [
+            'applicationId' => env('RAKUTEN_APP_ID'),
+            'isbn' => $isbn,
+            'format' => 'json',
+            'hits' => 1,
+        ];
+    });
 
     $url = 'https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404';
     $response = Http::get($url, $queryParams);
