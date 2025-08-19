@@ -57,7 +57,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::post('/reviews/{review}/like', [BookreviewController::class, 'like'])->name('reviews.like');
+    Route::post('/reviews/{bookreview}/like', [BookreviewController::class, 'like'])->name('reviews.like');
 });
 
 require __DIR__.'/auth.php';

@@ -68,7 +68,7 @@
         <form action="{{ route('reviews.like', $review->id) }}" method="POST" class="inline">
             @csrf
             <button type="submit" class="text-blue-500 hover:underline">
-                いいね ({{ $review->likes->count() }})
+                いいね ({{ $bookreview->likes->count() }})
             </button>
         </form>
     @else
