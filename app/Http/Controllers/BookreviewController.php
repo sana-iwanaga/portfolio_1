@@ -98,7 +98,7 @@ public function myReviews()
 {
     return Cache::remember("book_title_{$isbn}", now()->addDays(7), function () use ($isbn) {
         $queryParams = [
-            'applicationId' => env('RAKUTEN_APP_ID'),
+            'applicationId' => env('RAKUTEN_APP_ID', '1023370564471652170'),
             'isbn' => $isbn,
             'format' => 'json',
             'hits' => 1,
