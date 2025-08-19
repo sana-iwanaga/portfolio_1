@@ -21,11 +21,7 @@ class ReviewLike extends Model
 
     public function bookReview()
     {
-        return $this->belongsTo(BookReview::class);
+        return $this->belongsTo(BookReview::class, 'bookreview_id');
     }
-
-    public function likes() {
-    return $this->hasMany(ReviewLike::class);
-}
 
 }

@@ -36,6 +36,6 @@ class Bookreview extends Model
 
     public function likes() 
     {
-        return $this->hasMany(ReviewLike::class);
+        return $this->hasMany(ReviewLike::class, 'bookreview_id');
     }
 }
