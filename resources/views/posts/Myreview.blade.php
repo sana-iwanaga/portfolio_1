@@ -12,7 +12,7 @@
             @foreach ($reviews as $review)
                 <div class="p-4 bg-white rounded shadow mb-4">
                     <h3 class="font-bold text-lg">
-                        <a href="{{ route('books.book', $review->book_id) }}" class="text-blue-600 hover:underline">
+                        <a href="{{ route('books.book', $review->isbn, $review->book_id) }}" class="text-blue-600 hover:underline">
                             {{ $review->book_title }} - {{ $review->title }}</a>
                     </h3>
                     <p class="mt-2">評価: {{ str_repeat('★', $review->rating) }}</p>
