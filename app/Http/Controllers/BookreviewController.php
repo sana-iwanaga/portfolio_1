@@ -118,13 +118,18 @@ public function myReviews()
 
 
     // 書籍詳細ページ
-    public function like(Bookreview $bookreview)
-    {
-        $user = Auth::user();
-        $review = Bookreview::where('isbn', $bookreview->isbn)->firstOrFail();
-        $review->likes()->firstOrCreate([
-            'user_id' => $user->id,
-        ]);
-        return back();
-    }
-};
+public function like(Bookreview $bookreview)
+{
+    $user = Auth::user();
+
+    // 同じユーザーがまだいいねしていなければ作成
+    $bookreview->likes()->firstOrCreate([
+        'user_id' => $user->id,
+    ]);
+
+    return response()->json([
+        'success' => true,
+        'likes_count' => $bookreview->likes()->count(),
+    ]);
+}
+}
