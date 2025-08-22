@@ -1,55 +1,59 @@
-@extends('layouts.app')
+{{-- resources/views/users/show.blade.php --}}
 
-@section('content')
-<div class="container">
-    <h1>{{ $user->name }} さんのページ</h1>
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ $user->name }} さんのページ
+        </h2>
+    </x-slot>
 
-    <p>フォロー数: <span id="followingsCount">{{ $followingsCount }}</span></p>
-    <p>フォロワー数: <span id="followersCount">{{ $followersCount }}</span></p>
+    <div class="container py-8 max-w-3xl mx-auto sm:px-6 lg:px-8">
 
-    @if(auth()->check() && auth()->id() !== $user->id)
-        <button id="followBtn" data-user="{{ $user->id }}">
-            {{ $isFollowing ? 'フォロー解除' : 'フォローする' }}
-        </button>
-    @endif
+        <p>フォロー数: <span id="followingsCount">{{ $followingsCount }}</span></p>
+        <p>フォロワー数: <span id="followersCount">{{ $followersCount }}</span></p>
 
-    <hr>
-    <h2>投稿一覧</h2>
-    @forelse($bookreviews as $post)
-        <div class="post">
-            <p>{{ $post->body }}</p>
-            <small>{{ $post->created_at->format('Y/m/d H:i') }}</small>
-        </div>
-    @empty
-        <p>投稿はありません。</p>
-    @endforelse
-</div>
+        @if(auth()->check() && auth()->id() !== $user->id)
+            <button id="followBtn" data-user="{{ $user->id }}"
+                class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-500">
+                {{ $isFollowing ? 'フォロー解除' : 'フォローする' }}
+            </button>
+        @endif
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const btn = document.getElementById('followBtn');
-    if (!btn) return;
+        <hr class="my-4">
 
-    btn.addEventListener('click', function() {
-        const userId = btn.dataset.user;
-        // 現在のボタン文字で判断
-        const action = btn.textContent.includes('解除') ? 'unfollow' : 'follow';
+        <h2 class="text-lg font-bold mb-2">投稿一覧</h2>
+        @forelse($bookreviews as $post)
+            <div class="post border-b border-gray-200 py-2">
+                <p>{{ $post->body }}</p>
+                <small class="text-gray-500">{{ $post->created_at->format('Y/m/d H:i') }}</small>
+            </div>
+        @empty
+            <p>投稿はありません。</p>
+        @endforelse
+    </div>
 
-        fetch(`/users/${userId}/${action}`, {
-            method: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                'Accept': 'application/json'
-            }
-        })
-        .then(res => res.json())
-        .then(data => {
-            // ボタン切替
-            btn.textContent = data.following ? 'フォロー解除' : 'フォローする';
-            // フォロワー数更新
-            document.getElementById('followersCount').textContent = data.followersCount;
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const btn = document.getElementById('followBtn');
+        if (!btn) return;
+
+        btn.addEventListener('click', function() {
+            const userId = btn.dataset.user;
+            const action = btn.textContent.includes('解除') ? 'unfollow' : 'follow';
+
+            fetch(`/users/${userId}/${action}`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Accept': 'application/json'
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                btn.textContent = data.following ? 'フォロー解除' : 'フォローする';
+                document.getElementById('followersCount').textContent = data.followersCount;
+            });
         });
     });
-});
-</script>
-@endsection
+    </script>
+</x-app-layout>
