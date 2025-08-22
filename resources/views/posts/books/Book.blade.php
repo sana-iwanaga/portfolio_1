@@ -59,7 +59,10 @@
             @forelse($reviews as $review)
                 <div class="border-b border-gray-200 py-2">
                     <p>
-                        <strong>{{ $review->user->name ?? '名無し' }}</strong> - 感情: {{ $review->emotionCategory->emotioncategory_name ?? '不明' }}
+                        <strong>
+                            <a href="{{ route('users.show', $review->user) }}" class="text-indigo-600 hover:underline">
+                                {{ $review->user->name ?? '名無し' }}</a>
+                        </strong> - 感情: {{ $review->emotionCategory->emotioncategory_name ?? '不明' }}
                         @if($review->rating)
                             - 評価: {{ str_repeat('★', $review->rating) }}
                         @endif
