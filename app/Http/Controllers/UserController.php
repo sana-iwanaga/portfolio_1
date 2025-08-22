@@ -29,7 +29,7 @@ class UserController extends Controller
         $followersCount = $user->followers()->count();
         $followingsCount = $user->followings()->count();
 
-        return view('users.show', compact(
+        return view('posts.Userhome', compact(
             'user', 'bookreviews', 'isFollowing', 'followersCount', 'followingsCount'
         ));
     }
