@@ -9,6 +9,7 @@ use App\Http\Controllers\BookController;
 use App\Models\Bookreview;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BooklogController;
+use App\Http\Controllers\UserController;
 
 
 /*
@@ -59,5 +60,14 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware('auth')->group(function () {
     Route::post('/reviews/{bookreview}/like', [BookreviewController::class, 'like'])->name('reviews.like');
 });
+
+// フォローする
+Route::post('/users/{user}/follow', [UserController::class, 'follow'])->name('users.follow');
+
+// フォロー解除
+Route::post('/users/{user}/unfollow', [UserController::class, 'unfollow'])->name('users.unfollow');
+
+// ユーザーページ表示
+Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
 
 require __DIR__.'/auth.php';
