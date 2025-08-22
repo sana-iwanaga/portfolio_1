@@ -61,13 +61,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/reviews/{bookreview}/like', [BookreviewController::class, 'like'])->name('reviews.like');
 });
 
-// フォローする
-Route::post('/users/{user}/follow', [UserController::class, 'follow'])->name('users.follow');
-
-// フォロー解除
-Route::post('/users/{user}/unfollow', [UserController::class, 'unfollow'])->name('users.unfollow');
-
-// ユーザーページ表示
 Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
+Route::post('/users/{user}/follow', [UserController::class, 'follow'])->name('users.follow');
+Route::post('/users/{user}/unfollow', [UserController::class, 'unfollow'])->name('users.unfollow');
 
 require __DIR__.'/auth.php';

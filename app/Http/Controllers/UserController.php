@@ -2,22 +2,73 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class UserController extends Controller
 {
+    // 自分のホーム
     public function home(User $user)
     {
-        // ユーザーの投稿を取得
-        $bookreviews = $user->getOwnPagenateByLimit(5);
+        $bookreviews = $user->getOwnPaginateByLimit(5);
 
-        // ビューにデータを渡す
         return view('users.home', [
             'user' => $user,
             'bookreviews' => $bookreviews,
         ]);
     }
-}
 
+    // 他人のページ
+    public function show(User $user)
+    {
+        $bookreviews = $user->getOwnPaginateByLimit(5);
+
+        $me = Auth::user();
+        $isFollowing = $me ? $me->followings()->get()->contains($user->id) : false;
+        $followersCount = $user->followers()->count();
+        $followingsCount = $user->followings()->count();
+
+        return view('users.show', compact(
+            'user', 'bookreviews', 'isFollowing', 'followersCount', 'followingsCount'
+        ));
+    }
+
+    // フォロー
+    public function follow(User $user)
+    {
+        $me = Auth::user();
+
+        if ($me && !$me->followings()->where('following_id', $user->id)->exists()) {
+            $me->followings()->attach($user->id);
+        }
+
+        if (request()->ajax()) {
+            return response()->json([
+                'following' => true,
+                'followersCount' => $user->followers()->count(),
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'フォローしました。');
+    }
+
+    // フォロー解除
+    public function unfollow(User $user)
+    {
+        $me = Auth::user();
+
+        if ($me && $me->followings()->where('following_id', $user->id)->exists()) {
+            $me->followings()->detach($user->id);
+        }
+
+        if (request()->ajax()) {
+            return response()->json([
+                'following' => false,
+                'followersCount' => $user->followers()->count(),
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'フォローを解除しました。');
+    }
+}
