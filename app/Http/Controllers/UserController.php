@@ -13,7 +13,7 @@ class UserController extends Controller
     {
         $bookreviews = $user->getOwnPaginateByLimit(5);
 
-        return view('users.home', [
+        return view('posts.home', [
             'user' => $user,
             'bookreviews' => $bookreviews,
         ]);
