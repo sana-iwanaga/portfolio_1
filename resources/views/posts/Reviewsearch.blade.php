@@ -89,9 +89,10 @@
                             </h3>
 
                             {{-- ユーザー名（少し大きめ） --}}
-                            <span class="mb-2 block text-gray-600">
-                                {{ $review->user->name ?? '名無し' }}
-                            </span>
+                            <p>
+                                <a href="{{ route('users.show', $review->user) }}" class="text-indigo-600 hover:underline">
+                                    {{ $review->user->name ?? '名無し' }}</a>
+                            </p>
 
                             {{-- 評価 --}}
                             <p class="mt-2">評価: {{ str_repeat('★', $review->rating) }}</p>
