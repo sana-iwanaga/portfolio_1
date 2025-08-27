@@ -93,6 +93,9 @@
                                 {{ $review->user->name ?? '名無し' }}
                             </span>
 
+                            {{-- 評価 --}}
+                            <p class="mt-2">評価: {{ str_repeat('★', $review->rating) }}</p>
+
                             {{-- 本文 --}}
                             <p class="mt-2">{{ $review->body }}</p>
 
