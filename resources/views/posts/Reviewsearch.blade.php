@@ -69,14 +69,13 @@
             @if($reviews->count())
                 <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
                     @foreach($reviews as $review)
-                        <div class="rounded border p-4 shadow-sm transition hover:shadow-md">
-                            {{-- カテゴリを右上に --}}
+                        <div class="relative rounded border p-4 shadow-sm transition hover:shadow-md">
+                            
+                            {{-- カテゴリラベルを右上に固定 --}}
                             @if($review->emotionCategory)
-                                <div class="mb-2 text-right">
-                                    <span class="rounded bg-gray-200 px-2 py-1 text-sm">
-                                        {{ $review->emotionCategory->emotioncategory_name }}
-                                    </span>
-                                </div>
+                                <span class="absolute top-2 right-2 rounded bg-gray-200 px-2 py-1 text-xs">
+                                    {{ $review->emotionCategory->emotioncategory_name }}
+                                </span>
                             @endif
 
                             {{-- タイトル --}}
@@ -89,8 +88,8 @@
                                 </a>
                             </h3>
 
-                            {{-- ユーザー名を小さいラベルで --}}
-                            <span class="mb-2 inline-block rounded bg-gray-100 px-2 py-0.5 text-xs text-gray-600">
+                            {{-- ユーザー名（少し大きめ） --}}
+                            <span class="mb-2 inline-block rounded bg-gray-100 px-2 py-0.5 text-sm text-gray-600">
                                 {{ $review->user->name ?? '名無し' }}
                             </span>
 
@@ -116,3 +115,4 @@
         </div>
     </div>
 </x-app-layout>
+
