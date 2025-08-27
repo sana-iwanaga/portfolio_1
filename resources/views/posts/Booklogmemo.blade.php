@@ -10,16 +10,17 @@
         <div class="bg-white shadow rounded p-6 mb-6">
             <h3 class="text-lg font-bold mb-4">過去のメモ</h3>
 
-            @if(!empty($booklog->memo))
-                <div class="border rounded p-2 bg-gray-50">
-                    <p class="text-gray-800">{{ $booklog->memo }}</p>
+            @forelse($booklogmemos as $memo)
+                <div class="border rounded p-2 bg-gray-50 mb-2">
+                    <p class="text-gray-800">{{ $memo->content }}</p>
                     <span class="text-gray-500 text-sm">
-                        {{ $booklog->updated_at->format('Y-m-d H:i') }}
+                        {{ $memo->created_at->format('Y-m-d H:i') }}
                     </span>
                 </div>
-            @else
+            @empty
                 <p class="text-gray-400">まだメモはありません。</p>
-            @endif
+            @endforelse
         </div>
     </div>
 </x-app-layout>
+

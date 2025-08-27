@@ -114,7 +114,9 @@ class BooklogController extends Controller
             ->where('isbn', $isbn)
             ->firstOrFail();
 
-        return view('posts.Booklogmemo', compact('booklog'));
+        $booklogmemos = $booklog->memos()->orderBy('created_at', 'desc')->get();
+
+        return view('posts.Booklogmemo', compact('booklog', 'booklogmemos'));
     }
 
 }

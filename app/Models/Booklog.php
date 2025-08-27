@@ -31,4 +31,10 @@ class Booklog extends Model
             default => '不明',
         };
     }
+
+    public function memos()
+{
+    return $this->hasMany(BooklogMemo::class, 'booklog_id', 'booklog_id');
+}
+
 }
