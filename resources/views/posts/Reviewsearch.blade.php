@@ -74,7 +74,7 @@
                             @if($review->emotioncategory)
                                 <div class="mb-2 text-right">
                                     <span class="rounded bg-gray-200 px-2 py-1 text-sm">
-                                        {{ $review->emotioncategory->name }}
+                                        {{ $review->emotioncategory->emotioncategory_name }}
                                     </span>
                                 </div>
                             @endif
