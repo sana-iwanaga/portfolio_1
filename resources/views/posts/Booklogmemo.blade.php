@@ -10,11 +10,13 @@
         <div class="bg-white shadow rounded p-6 mb-6">
             <h3 class="text-lg font-bold mb-4">過去のメモ</h3>
 
-            @if($book->memos->count())
+            @if($booklogmemos->count())
                 <ul class="space-y-2">
-                    @foreach($book->memos as $memo)
+                    @foreach($booklogmemos as $memo)
                         <li class="border rounded p-2 bg-gray-50">
-                            <span class="text-gray-500 text-sm">{{ $memo->created_at->format('Y-m-d H:i') }}</span>
+                            <span class="text-gray-500 text-sm">
+                                {{ $memo->created_at->format('Y-m-d H:i') }}
+                            </span>
                             <p class="text-gray-800">{{ $memo->content }}</p>
                         </li>
                     @endforeach
