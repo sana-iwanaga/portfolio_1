@@ -138,17 +138,23 @@ public function search(Request $request)
     $query = Bookreview::query();
 
     // 検索キーワードがあれば絞り込み
-    if ($request->filled('keyword')) {
-        $keyword = $request->keyword;
-        $query->where('title', 'like', "%{$keyword}%")
-              ->orWhere('author', 'like', "%{$keyword}%")
-              ->orWhere('body', 'like', "%{$keyword}%");
+    if ($request->filled('title')) {
+        $query->where('title', 'like', "%{$request->title}%");
+    }
+
+    if ($request->filled('emotioncategory_id')) {
+        $query->orWhere('emotioncategory_id', $request->emotioncategory_id);
+    }
+
+    if ($request->filled('body')) {
+        $query->orWhere('body', 'like', "%{$request->body}%");
     }
 
     // ページネーション
-    $reviews = $query->with('user')->orderBy('created_at', 'desc')->paginate(10);
+    $reviews = $query->with('user', 'emotioncategory')->orderBy('created_at', 'desc')->paginate(10);
+    $emotioncategories = \App\Models\Emotioncategory::all();
+    return view('posts.Reviewsearch', compact('reviews', 'emotioncategories'));
 
-    return view('posts.Reviewsearch', compact('reviews'));
 }
 
 }
