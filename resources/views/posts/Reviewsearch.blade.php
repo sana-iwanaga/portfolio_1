@@ -58,6 +58,11 @@
                                     <span class="text-sm px-2 py-1 rounded bg-gray-200">{{ $review->emotioncategory->name }}</span>
                                 @endif
                             </div>
+                            <h3 class="font-bold text-lg mb-2">
+                                <a href="{{ route('books.book', ['isbn' => $review->isbn, 'book_id' => $review->book_id]) }}"
+                                   class="text-indigo-600 hover:underline">
+                                    {{ $review->book_title }} - {{ $review->title }}
+                                </a>
                             <p>{{ $review->body }}</p>
                             <small class="text-gray-500 block mt-2">{{ $review->created_at->format('Y/m/d H:i') }}</small>
                         </div>
