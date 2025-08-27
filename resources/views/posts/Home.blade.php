@@ -49,7 +49,7 @@
             <div class="mt-4 text-right">
                 <!-- 安全にするならGETリンク -->
                 <a href="{{ route('reviews.my') }}" class="text-blue-500 hover:underline">
-                    マイレビューを見る
+                    もっと見る（自分のレビュー一覧へ）
                 </a>
             </div>
         </div>
