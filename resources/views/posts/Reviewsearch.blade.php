@@ -71,10 +71,10 @@
                     @foreach($reviews as $review)
                         <div class="rounded border p-4 shadow-sm transition hover:shadow-md">
                             {{-- カテゴリを右上に --}}
-                            @if($review->emotioncategory)
+                            @if($review->emotionCategory)
                                 <div class="mb-2 text-right">
                                     <span class="rounded bg-gray-200 px-2 py-1 text-sm">
-                                        {{ $review->emotioncategory->emotioncategory_name }}
+                                        {{ $review->emotionCategory->emotioncategory_name }}
                                     </span>
                                 </div>
                             @endif
