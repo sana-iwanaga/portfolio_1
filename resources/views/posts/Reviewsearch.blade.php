@@ -89,7 +89,7 @@
                             </h3>
 
                             {{-- ユーザー名（少し大きめ） --}}
-                            <span class="mb-2 inline-block rounded bg-gray-100 px-2 py-0.5 text-gray-600">
+                            <span class="mb-2 block text-gray-600">
                                 {{ $review->user->name ?? '名無し' }}
                             </span>
 
