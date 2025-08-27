@@ -25,8 +25,8 @@
                         <option value="">すべての感情</option>
                         @foreach($emotioncategories as $category)
                             <option value="{{ $category->emotioncategory_id }}"
-                                {{ request('emotioncategory_name') == $category->emotioncategory_name ? 'selected' : '' }}>
-                                {{ $category->name }}
+                                {{ request('emotioncategory_id') == $category->emotioncategory_id ? 'selected' : '' }}>
+                                {{ $category->emotioncategory_name }}
                             </option>
                         @endforeach
                     </select>
