@@ -143,11 +143,11 @@ public function search(Request $request)
     }
 
     if ($request->filled('emotioncategory_id')) {
-        $query->orWhere('emotioncategory_id', $request->emotioncategory_id);
+        $query->where('emotioncategory_id', $request->emotioncategory_id);
     }
 
     if ($request->filled('body')) {
-        $query->orWhere('body', 'like', "%{$request->body}%");
+        $query->where('body', 'like', "%{$request->body}%");
     }
 
     // ページネーション
