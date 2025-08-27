@@ -132,4 +132,23 @@ public function like(Bookreview $bookreview)
         'likes_count' => $bookreview->likes()->count(),
     ]);
 }
+
+public function search(Request $request)
+{
+    $query = Bookreview::query();
+
+    // 検索キーワードがあれば絞り込み
+    if ($request->filled('keyword')) {
+        $keyword = $request->keyword;
+        $query->where('title', 'like', "%{$keyword}%")
+              ->orWhere('author', 'like', "%{$keyword}%")
+              ->orWhere('body', 'like', "%{$keyword}%");
+    }
+
+    // ページネーション
+    $reviews = $query->with('user')->orderBy('created_at', 'desc')->paginate(10);
+
+    return view('posts.Reviewsearch', compact('reviews'));
+}
+
 }

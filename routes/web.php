@@ -40,6 +40,7 @@ Route::get('/books/title/{isbn}', [BookreviewController::class, 'getTitle']);
 Route::delete('/bookreviews/{id}', [BookreviewController::class, 'destroy'])->name('reviews.destroy');
 Route::get('/myreviews', [BookreviewController::class, 'myReviews'])
     ->name('reviews.my');
+Route::get('/reviews/search', [BookreviewController::class, 'search'])->name('reviews.search');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

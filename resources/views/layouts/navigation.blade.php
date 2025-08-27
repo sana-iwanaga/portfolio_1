@@ -16,7 +16,7 @@
                         {{ __('Home') }}
                     </x-nav-link>
                     <x-nav-link :href="route('research')" :active="request()->routeIs('research')">
-                        {{ __('Books_research') }}
+                        {{ __('Books_search') }}
                     </x-nav-link>
                 </div>
             </div>
