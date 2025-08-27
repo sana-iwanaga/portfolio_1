@@ -107,4 +107,14 @@ class BooklogController extends Controller
 
         return back()->with('success', '読書ログを削除しました');
     }
+
+    public function allmemo()
+    {
+        $booklog = Booklog::where('user_id', Auth::id())
+            ->where('booklog_id', 'title')
+            ->firstOrFail();
+        $booklogmemos = $booklog->memos;
+        return view('posts.Booklogmemo', compact('booklog', 'booklogmemos'));
+    }
+
 }

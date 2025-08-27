@@ -40,6 +40,7 @@
 
                             <button type="submit" class="ml-2 bg-blue-500 text-white px-2 py-1 rounded">更新</button>
                         </form>
+                        <a href="{{ route('booklogs.memos', $log->title) }}" class="text-blue-600 hover:underline mt-1 inline-block">読書メモを見る</a>
                     </li>
                 @empty
                     <li>まだ読書ログはありません</li>
