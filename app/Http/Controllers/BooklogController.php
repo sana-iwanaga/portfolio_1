@@ -113,8 +113,8 @@ class BooklogController extends Controller
         $booklog = Booklog::where('user_id', Auth::id())
             ->where('isbn', $isbn)
             ->firstOrFail();
-        $booklogmemos = $booklog->memos;
-        return view('posts.Booklogmemo', compact('booklog', 'booklogmemos'));
+
+        return view('posts.Booklogmemo', compact('booklog'));
     }
 
 }
