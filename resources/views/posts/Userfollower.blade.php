@@ -8,11 +8,11 @@
     <div class="max-w-2xl mx-auto py-6 space-y-4">
         @forelse($followers as $follower)
             <div class="flex items-center justify-between bg-white p-4 rounded-xl shadow">
-                {{-- アイコン（仮に初期アイコン使用） --}}
+                {{-- アイコン（名前の頭文字） --}}
                 <div class="flex items-center space-x-3">
-                    <img src="https://via.placeholder.com/50"
-                         alt="icon"
-                         class="w-12 h-12 rounded-full">
+                    <div class="w-12 h-12 rounded-full bg-gray-300 flex items-center justify-center text-lg font-bold text-white">
+                        {{ mb_substr($follower->name, 0, 1) }}
+                    </div>
                     <a href="{{ route('users.show', $follower->id) }}" 
                        class="font-bold text-gray-800 hover:underline">
                         {{ $follower->name }}
@@ -47,4 +47,3 @@
         </div>
     </div>
 </x-app-layout>
-
