@@ -22,25 +22,24 @@
                     <li class="mb-4 border-b pb-2">
                         <strong>{{ $log->title }}</strong>
 
-                        {{-- ステータス更新 --}}
+                        {{-- ステータス＋メモ一括更新 --}}
                         <form action="{{ route('booklogs.update', $log->booklog_id) }}" method="POST" class="mt-1 inline">
                             @csrf
                             @method('PUT')
+
+                            {{-- ステータス --}}
                             <label for="status-{{ $log->booklog_id }}">ステータス:</label>
                             <select name="status" id="status-{{ $log->booklog_id }}" class="border rounded p-1">
                                 <option value="unread" {{ $log->status == 'unread' ? 'selected' : '' }}>未読</option>
                                 <option value="reading" {{ $log->status == 'reading' ? 'selected' : '' }}>読書中</option>
                                 <option value="read" {{ $log->status == 'read' ? 'selected' : '' }}>読了</option>
                             </select>
-                            <button type="submit" class="ml-2 bg-green-500 text-white px-2 py-1 rounded">更新</button>
-                        </form>
 
-                        {{-- メモ追加 --}}
-                        <form action="{{ route('booklogs.storeMemo', $log->booklog_id) }}" method="POST" class="mt-1 inline">
-                            @csrf
+                            {{-- メモ --}}
                             <label for="memo-{{ $log->booklog_id }}" class="ml-2">メモ追加:</label>
                             <input type="text" name="memo" id="memo-{{ $log->booklog_id }}" class="border rounded p-1 w-64" placeholder="ここにメモを入力">
-                            <button type="submit" class="ml-2 bg-blue-500 text-white px-2 py-1 rounded">保存</button>
+
+                            <button type="submit" class="ml-2 bg-green-500 text-white px-2 py-1 rounded">更新</button>
                         </form>
 
                         <a href="{{ route('booklogs.memos', $log->isbn) }}" class="text-blue-600 hover:underline mt-1 inline-block">過去のメモを見る</a>

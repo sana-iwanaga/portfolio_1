@@ -91,13 +91,13 @@ class BooklogController extends Controller
                           ->where('booklog_id', $id)
                           ->firstOrFail();
         $booklog->status = $request->status;
-        $booklog->memo = $request->memo;
         $booklog->save();
-
-        BooklogMemo::create([
-            'booklog_id' => $booklog->booklog_id,
-            'memo'       => $request->memo,
-        ]);
+        if ($request->filled('memo')) {
+            $booklog->memo->create([
+                'booklog_id' => $booklog->booklog_id,
+                'memo'       => $request->memo,
+            ]);
+        }
 
         return back()->with('success', '読書ログを更新しました');
     }
