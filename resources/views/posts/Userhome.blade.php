@@ -45,13 +45,20 @@
         <div class="space-y-4">
             @forelse($bookreviews as $post)
                 <div class="bg-white p-4 rounded-lg shadow">
-                    <p>{{ $post->body }}</p>
-                    <small class="text-gray-500">{{ $post->created_at->format('Y/m/d H:i') }}</small>
-                </div>
-            @empty
-                <p class="text-gray-500">投稿はありません。</p>
-            @endforelse
+                    {{-- 投稿タイトル --}}
+                    <h3 class="font-semibold text-gray-800 mb-1">{{ $post->title }}</h3>
+            {{-- 書籍タイトル --}}
+            <p class="text-sm text-gray-500 mb-2">書籍: {{ $post->book_title }}</p>
+            {{-- 投稿本文 --}}
+            <p>{{ $post->body }}</p>
+            {{-- 投稿日時 --}}
+            <small class="text-gray-400">{{ $post->created_at->format('Y/m/d H:i') }}</small>
         </div>
+    @empty
+        <p class="text-gray-500">投稿はありません。</p>
+    @endforelse
+</div>
+
     </div>
 
     <script>
