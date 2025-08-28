@@ -52,7 +52,7 @@
                     </div>
 
                     {{-- 書籍タイトル --}}
-                    <p class="text-sm text-gray-500 mb-3">📚 書籍: {{ $post->book_title }}</p>
+                    <p class="text-sm text-gray-500 mb-3">書籍: {{ $post->book_title }}</p>
 
                     {{-- 投稿本文 --}}
                     <p class="text-gray-700">{{ $post->body }}</p>
