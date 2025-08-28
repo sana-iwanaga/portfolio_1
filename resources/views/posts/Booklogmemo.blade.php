@@ -12,7 +12,7 @@
 
             @forelse($booklogmemos as $memo)
                 <div class="border rounded p-2 bg-gray-50 mb-2">
-                    <p class="text-gray-800">{{ $memo->content }}</p>
+                    <p class="text-gray-800">{{ $memo->memo }}</p>
                     <span class="text-gray-500 text-sm">
                         {{ $memo->created_at->format('Y-m-d H:i') }}
                     </span>
