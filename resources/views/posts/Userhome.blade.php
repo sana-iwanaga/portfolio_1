@@ -47,26 +47,20 @@
                 <div class="bg-white p-4 rounded-xl shadow hover:shadow-lg transition">
                     {{-- 投稿ヘッダー --}}
                     <div class="flex items-center justify-between mb-2">
-                <h3 class="font-semibold text-gray-800 text-lg">{{ $post->title }}</h3>
-                <small class="text-gray-400 text-sm">{{ $post->created_at->format('Y/m/d H:i') }}</small>
-            </div>
+                        <h3 class="font-semibold text-gray-800 text-lg">{{ $post->title }}</h3>
+                        <small class="text-gray-400 text-sm">{{ $post->created_at->format('Y/m/d H:i') }}</small>
+                    </div>
 
-            {{-- 書籍タイトル --}}
-            <p class="text-sm text-gray-500 mb-3">📚 書籍: {{ $post->book_title }}</p>
+                    {{-- 書籍タイトル --}}
+                    <p class="text-sm text-gray-500 mb-3">📚 書籍: {{ $post->book_title }}</p>
 
-            {{-- 投稿本文 --}}
-            <p class="text-gray-700">{{ $post->body }}</p>
+                    {{-- 投稿本文 --}}
+                    <p class="text-gray-700">{{ $post->body }}</p>
+                </div>
+            @empty
+                <p class="text-center text-gray-500">投稿はありません。</p>
+            @endforelse
         </div>
-    @empty
-        <p class="text-center text-gray-500">投稿はありません。</p>
-    @endforelse
-</div>
-
-    @empty
-        <p class="text-gray-500">投稿はありません。</p>
-    @endforelse
-</div>
-
     </div>
 
     <script>
@@ -94,3 +88,4 @@
     });
     </script>
 </x-app-layout>
+
