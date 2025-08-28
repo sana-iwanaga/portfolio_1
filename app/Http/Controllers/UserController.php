@@ -71,4 +71,18 @@ class UserController extends Controller
 
         return redirect()->back()->with('success', 'フォローを解除しました。');
     }
+
+    public function followings(User $user)
+    {
+        $followings = $user->followings()->paginate(10);
+
+        return view('posts.Userfollowings', compact('user', 'followings'));
+    }
+
+    public function followers(User $user)
+    {
+        $followers = $user->followers()->paginate(10);
+
+        return view('posts.Userfollower', compact('user', 'followers'));
+    }
 }

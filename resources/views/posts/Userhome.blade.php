@@ -1,5 +1,4 @@
-{{-- resources/views/users/show.blade.php --}}
-
+{{-- resources/views/Userhome.blade.php --}}
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -9,27 +8,50 @@
 
     <div class="container py-8 max-w-3xl mx-auto sm:px-6 lg:px-8">
 
-        <p>フォロー数: <span id="followingsCount">{{ $followingsCount }}</span></p>
-        <p>フォロワー数: <span id="followersCount">{{ $followersCount }}</span></p>
+        {{-- プロフィールエリア --}}
+        <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center space-x-4">
+                <div class="w-16 h-16 rounded-full bg-gray-300 flex items-center justify-center text-2xl font-bold">
+                    {{ mb_substr($user->name, 0, 1) }}
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold">{{ $user->name }}</h3>
 
-        @if(auth()->check() && auth()->id() !== $user->id)
-            <button id="followBtn" data-user="{{ $user->id }}"
-                class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-500">
-                {{ $isFollowing ? 'フォロー解除' : 'フォローする' }}
-            </button>
-        @endif
+                    {{-- フォロー・フォロワー数リンク --}}
+                    <div class="text-sm text-gray-600 space-x-4 mt-1">
+                        <a href="{{ route('users.followings', $user->id) }}" class="hover:underline">
+                            フォロー: <span id="followingsCount">{{ $followingsCount }}</span>
+                        </a>
+                        <a href="{{ route('users.followers', $user->id) }}" class="hover:underline">
+                            フォロワー: <span id="followersCount">{{ $followersCount }}</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            {{-- フォローボタン --}}
+            @if(auth()->check() && auth()->id() !== $user->id)
+                <button id="followBtn" data-user="{{ $user->id }}"
+                    class="px-4 py-2 bg-indigo-600 text-white rounded-full hover:bg-indigo-500 transition">
+                    {{ $isFollowing ? 'フォロー解除' : 'フォローする' }}
+                </button>
+            @endif
+        </div>
 
         <hr class="my-4">
 
-        <h2 class="text-lg font-bold mb-2">投稿一覧</h2>
-        @forelse($bookreviews as $post)
-            <div class="post border-b border-gray-200 py-2">
-                <p>{{ $post->body }}</p>
-                <small class="text-gray-500">{{ $post->created_at->format('Y/m/d H:i') }}</small>
-            </div>
-        @empty
-            <p>投稿はありません。</p>
-        @endforelse
+        {{-- 投稿一覧 --}}
+        <h2 class="text-lg font-bold mb-4">投稿一覧</h2>
+        <div class="space-y-4">
+            @forelse($bookreviews as $post)
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <p>{{ $post->body }}</p>
+                    <small class="text-gray-500">{{ $post->created_at->format('Y/m/d H:i') }}</small>
+                </div>
+            @empty
+                <p class="text-gray-500">投稿はありません。</p>
+            @endforelse
+        </div>
     </div>
 
     <script>
