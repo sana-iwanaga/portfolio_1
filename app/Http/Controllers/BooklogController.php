@@ -93,7 +93,7 @@ class BooklogController extends Controller
         $booklog->status = $request->status;
         $booklog->save();
         if ($request->filled('memo')) {
-            $booklog->memo->create([
+            $booklog->memos()->create([
                 'booklog_id' => $booklog->booklog_id,
                 'memo'       => $request->memo,
             ]);
