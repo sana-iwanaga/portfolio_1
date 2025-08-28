@@ -102,6 +102,24 @@ class BooklogController extends Controller
         return back()->with('success', '読書ログを更新しました');
     }
 
+    public function storeMemo(Request $request, $id)
+    {
+        $request->validate([
+            'memo' => 'required|string|max:1000',
+        ]);
+
+        $booklog = Booklog::where('user_id', Auth::id())
+                          ->where('booklog_id', $id)
+                          ->firstOrFail();
+
+        BooklogMemo::create([
+            'booklog_id' => $booklog->booklog_id,
+            'memo'       => $request->memo,
+        ]);
+
+        return back()->with('success', 'メモを追加しました');
+    }
+
     public function destroy($id)
     {
         $log = Booklog::where('user_id', Auth::id())
