@@ -56,7 +56,7 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/booklogs/{id}/status', [BooklogController::class, 'updateStatus'])->name('booklogs.updateStatus');
     Route::put('/booklogs/{id}', [BooklogController::class, 'update'])->name('booklogs.update');
     Route::delete('/booklogs/{id}', [BooklogController::class, 'destroy'])->name('booklogs.destroy');
-    Route::get('/booklogs/{id}/memo', [BooklogController::class, 'storeMemo'])->name('booklogs.memo');
+    Route::get('/booklogs/{id}/memo', [BooklogController::class, 'storeMemo'])->name('booklogs.storeMemo');
     Route::get('/booklogs/{isbn}/memos', [BooklogController::class, 'allmemo'])->name('booklogs.memos');
 });
 
