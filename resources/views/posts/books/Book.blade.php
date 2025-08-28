@@ -67,6 +67,7 @@
                             - 評価: {{ str_repeat('★', $review->rating) }}
                         @endif
                     </p>
+                    <p class="font-semibold">{{ $review->title }}</p>
                     <p>{{ $review->body }}</p>
 
                     {{-- いいねボタン --}}
