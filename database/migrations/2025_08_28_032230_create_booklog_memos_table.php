@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('booklog_id'); // Booklogとの紐付け
             $table->foreign('booklog_id')->references('booklog_id')->on('booklogs')->onDelete('cascade');
-            $table->text('content'); // メモ内容
+            $table->text('memo'); // メモ内容
             $table->timestamps(); // 作成・更新日時
         });
     }

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class BooklogMemo extends Model
 {
     use HasFactory;
-    protected $fillable = ['booklog_id', 'content'];
+    protected $fillable = ['booklog_id', 'memo'];
 
     public function booklog()
     {

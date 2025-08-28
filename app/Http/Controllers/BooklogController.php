@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Booklog;
+use App\Models\BooklogMemo;
 
 class BooklogController extends Controller
 {
@@ -56,9 +57,7 @@ class BooklogController extends Controller
             'isbn'    => $request->isbn,
             'title'   => $request->title,
             'status'  => $request->status,
-            'memo'    => $request->memo,
         ]);
-
 
         return redirect()->route('booklogs.index')->with('success', 'Booklog created successfully.');
     }
@@ -70,12 +69,13 @@ class BooklogController extends Controller
             'status' => 'required|in:unread,reading,read',
         ]);
 
+
         $booklog = Booklog::where('user_id', Auth::id())
                           ->where('booklog_id', $id)
                           ->firstOrFail();
-
         $booklog->status = $request->status;
         $booklog->save();
+
 
         return back()->with('success', 'ステータスを更新しました');
     }
@@ -93,6 +93,11 @@ class BooklogController extends Controller
         $booklog->status = $request->status;
         $booklog->memo = $request->memo;
         $booklog->save();
+
+        BooklogMemo::create([
+            'booklog_id' => $booklog->booklog_id,
+            'memo'       => $request->memo,
+        ]);
 
         return back()->with('success', '読書ログを更新しました');
     }

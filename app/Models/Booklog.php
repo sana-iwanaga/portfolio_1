@@ -7,21 +7,24 @@ use Illuminate\Database\Eloquent\Model;
 
 class Booklog extends Model
 {
+    use HasFactory;
+
     protected $primaryKey = 'booklog_id';
+
     protected $fillable = [
         'user_id',
         'isbn',
         'title',
         'status',
-        'memo',
     ];
-    use HasFactory;
 
+    // ユーザーとのリレーション
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
+    // ステータスのラベル
     public function getStatusLabelAttribute()
     {
         return match ($this->attributes['status']) {
@@ -32,9 +35,9 @@ class Booklog extends Model
         };
     }
 
+    // メモとのリレーション
     public function memos()
-{
-    return $this->hasMany(BooklogMemo::class, 'booklog_id', 'booklog_id');
-}
-
+    {
+        return $this->hasMany(BooklogMemo::class, 'booklog_id', 'booklog_id');
+    }
 }
