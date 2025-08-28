@@ -46,7 +46,7 @@
                             {{ __('Profile') }}
                         </x-dropdown-link>
                         <x-dropdown-link :href="route('users.show', Auth::id())">
-                            {{ __('Auth::user()->nameさんのページ') }}
+                            {{ 'Auth::user()->name }}さんのページ
                         </x-dropdown-link>
 
                         <!-- Authentication -->
