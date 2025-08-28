@@ -1,6 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">{{ Auth::user()->name }} さんの読書ログ</h2>
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ Auth::user()->name }} さんの読書ログ
+        </h2>
     </x-slot>
 
     <div class="py-8 max-w-4xl mx-auto sm:px-6 lg:px-8">
@@ -22,27 +24,34 @@
                     <li class="mb-4 border-b pb-2">
                         <strong>{{ $log->title }}</strong>
 
-                        {{-- ステータス＋メモ一括更新 --}}
-                        <form action="{{ route('booklogs.update', $log->booklog_id) }}" method="POST" class="mt-1 inline">
+                        {{-- ステータス & メモ更新フォーム --}}
+                        <form action="{{ route('booklogs.update', $log->booklog_id) }}" method="POST" class="mt-1 flex items-center">
                             @csrf
                             @method('PUT')
 
                             {{-- ステータス --}}
                             <label for="status-{{ $log->booklog_id }}">ステータス:</label>
-                            <select name="status" id="status-{{ $log->booklog_id }}" class="border rounded p-1">
+                            <select name="status" id="status-{{ $log->booklog_id }}" class="border rounded p-1 ml-2">
                                 <option value="unread" {{ $log->status == 'unread' ? 'selected' : '' }}>未読</option>
                                 <option value="reading" {{ $log->status == 'reading' ? 'selected' : '' }}>読書中</option>
                                 <option value="read" {{ $log->status == 'read' ? 'selected' : '' }}>読了</option>
                             </select>
 
                             {{-- メモ --}}
-                            <label for="memo-{{ $log->booklog_id }}" class="ml-2">メモ追加:</label>
-                            <input type="text" name="memo" id="memo-{{ $log->booklog_id }}" class="border rounded p-1 w-64" placeholder="ここにメモを入力">
+                            <label for="memo-{{ $log->booklog_id }}" class="ml-4">メモ:</label>
+                            <input type="text" name="memo" id="memo-{{ $log->booklog_id }}" 
+                                   class="border rounded p-1 w-64 ml-2" placeholder="ここにメモを入力">
 
-                            <button type="submit" class="ml-2 bg-green-500 text-white px-2 py-1 rounded">更新</button>
+                            {{-- 更新ボタン --}}
+                            <button type="submit" class="ml-4 bg-blue-500 text-white px-3 py-1 rounded">
+                                更新
+                            </button>
                         </form>
 
-                        <a href="{{ route('booklogs.memos', $log->isbn) }}" class="text-blue-600 hover:underline mt-1 inline-block">過去のメモを見る</a>
+                        {{-- 過去メモ閲覧リンク --}}
+                        <a href="{{ route('booklogs.memos', $log->isbn) }}" class="text-blue-600 hover:underline mt-1 inline-block">
+                            過去のメモを見る
+                        </a>
                     </li>
                 @empty
                     <li>まだ読書ログはありません</li>
@@ -51,5 +60,6 @@
         </div>
     </div>
 </x-app-layout>
+
 
 
