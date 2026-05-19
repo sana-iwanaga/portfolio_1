@@ -52,10 +52,11 @@ class RakutenBookController extends Controller
             $response = Http::get($url, $queryParams);
 
             if ($response->failed()) {
-                return view('posts.research', [
-                    'books' => [],
-                    'error' => 'APIの取得に失敗しました',
-                ]);
+                dd(
+                    $response->status(),
+                    $response->body(),
+                    $response->json()
+                );
             }
 
             $data = $response->json();
