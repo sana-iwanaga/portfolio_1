@@ -40,7 +40,7 @@ class RakutenBookController extends Controller
         }
 
         // 条件が1つもない場合
-        if (count($queryParams) === 3) {
+        if (count($queryParams) === 4) {
             return view('posts.research', [
                 'books' => [],
                 'error' => '検索条件を1つ以上入力してください',
