@@ -48,7 +48,7 @@ class RakutenBookController extends Controller
         }
 
         try {
-            $url = 'https://openapi.rakuten.co.jp/services/api/BooksBook/Search/20170404?';
+            $url = 'https://openapi.rakuten.co.jp/services/api/BooksBook/Search/20170404';
             $response = Http::get($url, $queryParams);
 
             if ($response->failed()) {
