@@ -17,8 +17,8 @@ class RakutenBookController extends Controller
         $keyword = $request->input('q'); // フリーワード検索用
 
         $queryParams = [
-            'applicationId' => env('RAKUTEN_APP_ID', 'bdab1540-4dd2-4840-9d97-ec56825b8cbb'),
-            'accessKey' => env('RAKUTEN_ACCESS_KEY', 'pk_4OafB4EU5IoKJqBam7lyNsNrLfAnigWjgux0T49EOCd'),
+            'applicationId' => env('RAKUTEN_APP_ID'),
+            'accessKey' => env('RAKUTEN_ACCESS_KEY'),
             'format' => 'json',
             'hits' => 20,
         ];
@@ -52,6 +52,7 @@ class RakutenBookController extends Controller
             $response = Http::withHeaders([
                 'Referer' => 'https://portfolio-bookmemory-bd6e33aa868f.herokuapp.com',
                 'Origin' => 'https://portfolio-bookmemory-bd6e33aa868f.herokuapp.com',
+                'User-Agent' => 'Mozilla/5.0',
             ])->get($url, $queryParams);
 
             if ($response->failed()) {
