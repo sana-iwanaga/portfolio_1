@@ -13,6 +13,7 @@ class BookController extends Controller
     {
         $response = Http::get('https://openapi.rakuten.co.jp/services/api/BooksBook/Search/20170404?', [
             'applicationId' => env('RAKUTEN_APP_ID', 'bdab1540-4dd2-4840-9d97-ec56825b8cbb'),
+            'accessKey' => env('RAKUTEN_ACCESS_KEY', 'pk_4OafB4EU5IoKJqBam7lyNsNrLfAnigWjgux0T49EOCd'),
             'isbn' => $isbn, 
             'format' => 'json',
         ]);

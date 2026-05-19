@@ -18,6 +18,7 @@ class RakutenBookController extends Controller
 
         $queryParams = [
             'applicationId' => env('RAKUTEN_APP_ID', 'bdab1540-4dd2-4840-9d97-ec56825b8cbb'),
+            'accessKey' => env('RAKUTEN_ACCESS_KEY', 'pk_4OafB4EU5IoKJqBam7lyNsNrLfAnigWjgux0T49EOCd'),
             'format' => 'json',
             'hits' => 20,
         ];
