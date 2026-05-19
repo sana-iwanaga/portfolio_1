@@ -50,8 +50,9 @@ class RakutenBookController extends Controller
         try {
             $url = 'https://openapi.rakuten.co.jp/services/api/BooksBook/Search/20170404';
             $response = Http::withHeaders([
-                'Referer' => 'https://portfolio-bookmemory-bd6e33aa868f.herokuapp.com',
-                ])->get($url, $queryParams);
+                'Referer' => 'https://portfolio-bookmemory-bd6e33aa868f.herokuapp.com/',
+                'Origin' => 'https://portfolio-bookmemory-bd6e33aa868f.herokuapp.com',
+            ])->get($url, $queryParams);
 
             if ($response->failed()) {
                 dd(
