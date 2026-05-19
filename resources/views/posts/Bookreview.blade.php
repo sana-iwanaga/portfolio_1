@@ -65,17 +65,6 @@
 
             <input type="hidden" name="bookreview[isbn]" value="{{ $isbn }}">
 
-            <!-- <div>
-                <label for="book" class="block text-sm font-medium text-gray-700">本</label>
-                <input
-                    type="text"
-                    name="bookreview[book]"
-                    id="book"
-                    x-model="selected.title"
-                    class="mt-1 block w-full border border-gray-300 rounded-md p-2"
-                    required
-                >
-            </div> -->
 
             <div>
                 <label for="rating" class="block text-sm font-medium text-gray-700">評価</label>

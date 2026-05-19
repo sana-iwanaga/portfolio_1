@@ -17,7 +17,7 @@ class RakutenBookController extends Controller
         $keyword = $request->input('q'); // フリーワード検索用
 
         $queryParams = [
-            'applicationId' => env('RAKUTEN_APP_ID', '1023370564471652170'),
+            'applicationId' => env('RAKUTEN_APP_ID', 'bdab1540-4dd2-4840-9d97-ec56825b8cbb'),
             'format' => 'json',
             'hits' => 20,
         ];
@@ -47,7 +47,7 @@ class RakutenBookController extends Controller
         }
 
         try {
-            $url = 'https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404';
+            $url = 'https://openapi.rakuten.co.jp/services/api/BooksBook/Search/20170404?';
             $response = Http::get($url, $queryParams);
 
             if ($response->failed()) {
